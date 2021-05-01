@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Books & Authors</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <style>
+            body{
+                margin: 50px;
+            }
+            div, a{
+                display: inline-block;
+                vertical-align: top;
+            }
+            div{
+                width: 500px;
+                margin-right: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h2>{{ books.title }}</h2>
+            <p>ID: {{ books.id }}</p>
+            <p>Description: {{ books.desc }}</p>
+            <p>Authors:</p>
+            <ul>
+                {% for author in authors %}
+                <li>{{ author.first_name }} {{ author.last_name }}</li>
+                {% endfor %}
+            </ul>
+        <div>
+            <form action="/add_authors/{{ books.id }}" method="post">
+                {% csrf_token %}
+                <select name="author_to_add">
+                    {% for author in all_authors %}
+                    <option value="{{ author.id }}">
+                        {{ author.first_name }} {{ author.last_name }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Add">
+            </form>
+            
+        </div>
+        <a href="/">Back</a>
+    </body>
+</html>

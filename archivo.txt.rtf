@@ -1,0 +1,56 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red63\green63\blue63;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c31373\c31373\c31373;\cssrgb\c100000\c100000\c100000;}
+\margl1440\margr1440\vieww40760\viewh23040\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
+#Consulta: crea 5 libros con los siguientes nombres: C Sharp, Java, Python, PHP, Ruby\
+\
+dominiquehenriquez@iMac-de-Dominique book_author_proj % cd ..\
+dominiquehenriquez@iMac-de-Dominique django_orm % cd ..\
+dominiquehenriquez@iMac-de-Dominique django % cd ..\
+dominiquehenriquez@iMac-de-Dominique python_stack % source my_enviroments/djangoPy3env/bin/activate\
+(djangoPy3env) dominiquehenriquez@iMac-de-Dominique python_stack % cd django/django_orm/book_author_proj \
+(djangoPy3env) dominiquehenriquez@iMac-de-Dominique book_author_proj % python manage.py makemigrations\
+No changes detected\
+\pard\tx512\pardeftab720\partightenfactor0
+\cf2 (djangoPy3env) dominiquehenriquez@iMac-de-Dominique book_author_proj % python manage.py migrate       \
+\pard\pardeftab720\partightenfactor0
+\cf2 Operations to perform:\
+  Apply all migrations: admin, auth, books_authors_app, contenttypes, sessions\
+Running migrations:\
+  No migrations to apply.\
+(djangoPy3env) dominiquehenriquez@iMac-de-Dominique book_author_proj % python manage.py shell  \
+Python 3.9.2 (default, Mar 26 2021, 23:27:12) \
+[Clang 12.0.0 (clang-1200.0.32.29)] on darwin\
+Type "help", "copyright", "credits" or "license" for more information.\
+(InteractiveConsole)\
+>>> from  books_authors_app.models import Book, Author\
+>>> Book.objects.get(id=3).authors.all()\
+<QuerySet [<Author: Emily,Dickinson>, <Author:  Fiodor,Dostoevsky>, <Author: Bill, Shakespeare>]>\
+>>> a1=Author.objects.get(id=1)\
+>>> Book.objects.get(id=3)\
+<Book: Book object (3)>\
+>>> b3=Book.objects.get(id=3)\
+>>> b3.authors.remove(a1)\
+>>> a5=Author.objects.get(id=5)\
+>>> b2=Book.objects.get(id=2)\
+>>> b2.authors.add(a5)\
+>>> a3=Author.objects.get(id=3)\
+>>> a3.books.objects.all()\
+Traceback (most recent call last):\
+  File "<console>", line 1, in <module>\
+AttributeError: 'ManyRelatedManager' object has no attribute 'objects'\
+>>> a3.books.all()\
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>\
+>>> b5=Book.objects.get(id=5)\
+>>> b5.Author.all()\
+Traceback (most recent call last):\
+  File "<console>", line 1, in <module>\
+AttributeError: 'Book' object has no attribute 'Author'\
+>>> b5.authors.all()\
+<QuerySet [<Author: Bill, Shakespeare>]>\
+>>> }
